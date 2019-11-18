@@ -38,6 +38,8 @@
 				"LightMode" = "ForwardAdd"
 			}
 			
+			Blend One One
+
 			CGPROGRAM
 
 			#pragma target 3.0
