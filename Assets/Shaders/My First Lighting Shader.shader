@@ -1,7 +1,7 @@
-﻿Shader "Custom/My First Lighting Shader"
+﻿Shader "Custom/My First Lighting Shader" 
 {
 
-	Properties 
+	Properties
 	{
 		_Tint ("Tint", Color) = (1, 1, 1, 1)
 		_MainTex ("Albedo", 2D) = "white" {}
@@ -14,7 +14,7 @@
 
 		Pass
 		{
-			Tags
+			Tags 
 			{
 				"LightMode" = "ForwardBase"
 			}
@@ -37,7 +37,7 @@
 			{
 				"LightMode" = "ForwardAdd"
 			}
-			
+
 			Blend One One
 			ZWrite Off
 
@@ -53,6 +53,6 @@
 			#include "My Lighting.cginc"
 
 			ENDCG
-		}	
+		}
 	}
 }

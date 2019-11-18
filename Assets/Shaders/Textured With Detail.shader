@@ -26,13 +26,13 @@ Shader "Custom/Textured With Detail"
 			sampler2D _MainTex, _DetailTex;
 			float4 _MainTex_ST, _DetailTex_ST;
 
-			struct VertexData
+			struct VertexData 
 			{
 				float4 position : POSITION;
 				float2 uv : TEXCOORD0;
 			};
 
-			struct Interpolators 
+			struct Interpolators
 			{
 				float4 position : SV_POSITION;
 				float2 uv : TEXCOORD0;
@@ -48,7 +48,7 @@ Shader "Custom/Textured With Detail"
 				return i;
 			}
 
-			float4 MyFragmentProgram (Interpolators i) : SV_TARGET
+			float4 MyFragmentProgram (Interpolators i) : SV_TARGET 
 			{
 				float4 color = tex2D(_MainTex, i.uv) * _Tint;
 				color *= tex2D(_DetailTex, i.uvDetail) * unity_ColorSpaceDouble;

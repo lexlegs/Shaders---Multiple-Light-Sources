@@ -29,13 +29,13 @@ Shader "Custom/Texture Splatting"
 
 			sampler2D _Texture1, _Texture2, _Texture3, _Texture4;
 
-			struct VertexData 
+			struct VertexData
 			{
 				float4 position : POSITION;
 				float2 uv : TEXCOORD0;
 			};
 
-			struct Interpolators
+			struct Interpolators 
 			{
 				float4 position : SV_POSITION;
 				float2 uv : TEXCOORD0;
