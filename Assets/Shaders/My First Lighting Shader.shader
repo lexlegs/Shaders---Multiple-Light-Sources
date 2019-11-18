@@ -39,6 +39,7 @@
 			}
 			
 			Blend One One
+			ZWrite Off
 
 			CGPROGRAM
 
@@ -46,6 +47,8 @@
 
 			#pragma vertex MyVertexProgram
 			#pragma fragment MyFragmentProgram
+
+			#define POINT
 
 			#include "My Lighting.cginc"
 
