@@ -35,12 +35,17 @@ struct Interpolators
 void ComputeVertexLightColor (inout Interpolators i)
 {
 	#if defined(VERTEXLIGHT_ON)
-		float3 lightPos = float3(unity_4LightPosX0.x, unity_4LightPosY0.x, unity_4LightPosZ0.x);
-		float3 lightVec = lightPos - i.worldPos;
-		float3 lightDir = normalize(lightVec);
-		float ndot1 = DotClamped(i.normal, lightDir);
-		float attenuation = 1 / (1 + dot(lightVec, lightVec) * unity_4LightAtten0.x);
-		i.vertexLightColor = unity_LightColor[0].rgb * ndot1 * attenuation;
+		//float3 lightPos = float3(unity_4LightPosX0.x, unity_4LightPosY0.x, unity_4LightPosZ0.x);
+		//float3 lightVec = lightPos - i.worldPos;
+		//float3 lightDir = normalize(lightVec);
+		//float ndot1 = DotClamped(i.normal, lightDir);
+		//float attenuation = 1 / (1 + dot(lightVec, lightVec) * unity_4LightAtten0.x);
+		i.vertexLightColor = Shade4PointLights(
+			unity_4LightPosX0, unity_4LightPosY0, unity_4LightPosZ0,
+			unity_LightColor[0].rgb, unity_LightColor[1].rgb,
+			unity_LightColor[2].rgb, unity_LightColor[3].rgb,
+			unity_4LightAtten0, i.worldPos, i.normal
+		);
 	#endif
 }
 
