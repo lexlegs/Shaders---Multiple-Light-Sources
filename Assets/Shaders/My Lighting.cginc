@@ -73,6 +73,7 @@ UnityLight CreateLight (Interpolators i)
 	UNITY_LIGHT_ATTENUATION(attenuation, 0, i.worldPos);
 	light.color = _LightColor0.rgb * attenuation;
 	light.ndotl = DotClamped(i.normal, light.dir);
+
 	return light;
 }
 
@@ -82,9 +83,11 @@ UnityIndirect CreateIndirectLight (Interpolators i)
 	indirectLight.diffuse = 0;
 	indirectLight.specular = 0;
 
-	#if defined(VERTEXLIGHT_ON)
-		indirectLight.diffuse = i.vertexLightColor;
+	#if defined(FORWARD_BASE_PASS)
+		indirectLight.diffuse += max(0, ShadeSH9(float4(i.normal, 1)));
 	#endif
+
+	indirectLight.diffuse += max(0, ShadeSH9(float4(i.normal, 1)));
 	
 	return indirectLight;
 }
@@ -104,6 +107,9 @@ float4 MyFragmentProgram (Interpolators i) : SV_TARGET
 	//UnityIndirect indirectLight;
 	//indirectLight.diffuse = 0;
 	//indirectLight.specular = 0;
+
+	//float3 shColor = ShadeSH9(float4(i.normal, 1));
+	//return float4(shColor, 1);
 
 	return UNITY_BRDF_PBS(albedo, specularTint, oneMinusReflectivity, _Smoothness, i.normal, viewDir, CreateLight(i), CreateIndirectLight(i));
 }
